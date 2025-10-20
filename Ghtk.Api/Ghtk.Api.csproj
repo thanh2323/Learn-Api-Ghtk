@@ -9,6 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="..\ClientAuthentication.Api\ClientAuthentication.Api.csproj" />
     <ProjectReference Include="..\Ghtk.Authorization\Ghtk.Authorization.csproj" />
+    <ProjectReference Include="..\Ghtk.Repository.Abstractions\Ghtk.Repository.Abstractions.csproj" />
+    <ProjectReference Include="..\Ghtk.Repository.SqlServer\Ghtk.Repository.SqlServer.csproj" />
   </ItemGroup>
 
 </Project>

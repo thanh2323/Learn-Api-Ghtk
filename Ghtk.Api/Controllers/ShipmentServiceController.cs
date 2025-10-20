@@ -1,4 +1,6 @@
-﻿using Ghtk.Api.Models;
+﻿using System.Threading.Tasks;
+using Ghtk.Api.Models;
+using Ghtk.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,16 +11,17 @@ namespace Ghtk.Api.Controllers
     [Route("/services/shipment")]
     [ApiController]
 
-    public class ShipmentServiceController(ILogger<ShipmentServiceController> logger) : ControllerBase
+    public class ShipmentServiceController(ILogger<ShipmentServiceController> logger, IOrderRepository orderRepository) : ControllerBase
     {
         private readonly ILogger<ShipmentServiceController> _logger = logger;
-
+        private readonly IOrderRepository _orderRepository = orderRepository;
         [Route("order")]
         [HttpPost]
         
-        public IActionResult SubmitOrder([FromBody] SubmitOrderRequest order)
+        public async Task<IActionResult> SubmitOrder([FromBody] SubmitOrderRequest order)
         {
             _logger.LogInformation("SubmitOrder Called");
+            var result =  await _orderRepository.CreateOrderAsync();
             var response = new SubmitOrderResponse
             {
                 Success = true,
